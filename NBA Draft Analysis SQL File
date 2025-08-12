@@ -1,0 +1,52 @@
+#First 60 Draft Picks Merger 1985-2020 (Tab #1)
+
+#This tab is used to create a database of drafted NBA players from 1985-2020, 
+#specifically the first 60 picks from each draft
+
+CREATE DATABASE `NBA_Drafting_And_Team_Stats` ;
+USE `NBA_Drafting_And_Team_Stats`;
+
+
+ALTER TABLE `nba (1985-2020) player value metrics pertinent`
+MODIFY COLUMN `Pick Range (Before)` VARCHAR(61);
+
+ALTER TABLE `nba (1985-2020) player value metrics pertinent`
+MODIFY COLUMN `Pick Range` VARCHAR(61);
+
+ALTER TABLE `nba (1985-2020) player value metrics pertinent`
+MODIFY COLUMN `Pick Range_[0]` VARCHAR(61);
+
+SELECT * FROM `nba (1985-2020) player value metrics pertinent`;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#Merged Standings and Draft Data Table (Tab #2)
+
+#This tab is used to merge team data with player data for each player selected by each team 
+#in the first 60 picks of each of the drafts from 1985-2020
+
+CREATE TABLE draft_standings_merged_database AS
+SELECT 
+  draft_database.*,
+  standings_database.*
+FROM 
+  `(1985-2020) draft player data set` AS draft_database
+LEFT JOIN 
+  `(1985-2020) updated nba standings` AS standings_database
+ON 
+  draft_database.`Team And Draft Year` = standings_database.`Team And Year`;
